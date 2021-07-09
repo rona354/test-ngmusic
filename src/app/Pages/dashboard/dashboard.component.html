@@ -1,0 +1,259 @@
+<div class="relative bg-gray-100">
+  <!-- HEADER -->
+  <div class="mx-auto">
+    <div
+      class="
+        flex
+        justify-between
+        items-center
+        bg-gradient-to-r
+        from-purple-700
+        via-purple-600
+        to-purple-500
+        rounded-b-b-curved
+        py-4
+        px-2
+      "
+    >
+      <!-- TOMBOL MENU -->
+      <div class="flex justify-start lg:w-0 lg:flex-1">
+        <button
+          type="button"
+          class="
+            rounded-md
+            p-2
+            inline-flex
+            items-center
+            justify-center
+            text-white
+            hover:text-gray-500 hover:bg-gray-100
+            focus:outline-none
+            focus:ring-2
+            focus:ring-inset
+            focus:ring-indigo-500
+          "
+          aria-expanded="false"
+          routerLink=".."
+        >
+          <!-- Heroicon name: outline/menu -->
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+      <!-- JUDUL -->
+      <div class="-mr-2 -my-2 text-white">
+        <label for="">ngmusic</label>
+      </div>
+      <!-- TOMBOL SEARCH -->
+      <nav class="flex space-x-10">
+        <div class="relative">
+          <button
+            type="button"
+            class="
+              rounded-md
+              p-2
+              inline-flex
+              items-center
+              justify-center
+              text-white
+              hover:text-gray-500 hover:bg-gray-100
+              focus:outline-none
+              focus:ring-2
+              focus:ring-inset
+              focus:ring-indigo-500
+            "
+            aria-expanded="false"
+            (click)="clickedPhotoProject()"
+          >
+            <!-- Heroicon name: outline/search -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- LABEL SEARCH RESULT FOR : -->
+  <div class="my-6">
+    <p class="text-center text-sm">
+      Search result for :
+      <span class="text-purple-600 text-lg font-semibold tracking-wide">
+        {{ searchKeyword }}
+      </span>
+    </p>
+  </div>
+
+  <!-- CARDS -->
+  <div
+    class="flex bg-white m-3 p-2 rounded-xl shadow-md"
+    *ngFor="let item of results; let i = index"
+  >
+    <!-- ARTWORK IMAGE -->
+    <div class="flex-none w-24 relative">
+      <img
+        [src]="item.artworkUrl60"
+        alt="artwork"
+        class="absolute inset-0 w-full h-full object-cover rounded-lg"
+      />
+    </div>
+    <!-- RIGHT DESCRIPTION -->
+    <div class="flex-auto pl-4">
+      <div class="flex flex-wrap items-baseline">
+        <div class="w-full flex-none text-xs font-medium text-gray-800">
+          {{ item.artistName }}
+        </div>
+        <div class="text-sm font-bold text-gray-800 mb-8">
+          {{ item.collectionName }}
+        </div>
+      </div>
+      <div class="flex space-x-3 text-xs font-normal">
+        <div class="flex-auto flex space-x-3">
+          <button
+            class="
+              flex
+              items-center
+              justify-center
+              rounded-3xl
+              bg-green-500
+              text-white
+              py-1
+              px-3
+            "
+          >
+            {{ item.primaryGenreName }}
+          </button>
+        </div>
+        <button
+          class="
+            flex-none flex
+            items-center
+            justify-center
+            w-9
+            h-9
+            rounded-full
+            bg-purple-50
+            text-orange-400
+          "
+          type="button"
+          aria-label="like"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span class="ml-1">{{ item.collectionPrice }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal ketika klik screenshot project -->
+<div
+  class="
+    fixed
+    z-50
+    left-0
+    top-0
+    w-full
+    h-full
+    overflow-auto
+    bg-black bg-opacity-75
+    transition-all
+  "
+  [ngClass]="{ hidden: !showModal, block: showModal }"
+>
+  <!-- The Close Button -->
+  <span
+    (click)="showModal = !showModal"
+    class="
+      absolute
+      top-0
+      right-0
+      mr-5
+      mt-3
+      text-white text-3xl
+      lg:text-5xl
+      font-bold
+      cursor-pointer
+      transition-all
+      hover:text-gray-50
+    "
+    >&times;</span
+  >
+  <!-- Modal Content (The Image) -->
+  <form class="flex flex-col justify-center items-center w-full h-full px-6">
+    <p class="text-white text-xl mb-8 font-semibold tracking-wide">Search</p>
+    <input
+      class="
+        bg-white
+        rounded-3xl
+        text-purple-600 text-sm
+        font-semibold
+        tracking-wide
+        w-full
+        p-3
+        mb-4
+        text-center
+        focus:border-0
+      "
+      placeholder="Artist / Album / Title"
+      [formControl]="searchControl"
+    />
+    <button
+      class="
+        bg-gradient-to-r
+        from-purple-700
+        via-purple-600
+        to-purple-500
+        rounded-3xl
+        text-white
+        w-full
+        p-3
+        text-sm
+        font-semibold
+        tracking-wide
+      "
+      [disabled]="searchControl.invalid"
+      (click)="iTunesSearch(searchControl.value)"
+    >
+      Search iTunes
+    </button>
+  </form>
+</div>

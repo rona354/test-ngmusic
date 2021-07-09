@@ -1,0 +1,60 @@
+<div
+  class="
+    bg-gradient-to-b
+    from-purple-700
+    via-purple-600
+    to-purple-500
+    min-h-screen
+    w-full
+  "
+>
+  <form class="flex flex-col justify-center items-center min-h-screen relative">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-16 w-16"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="white"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1"
+        d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+      />
+    </svg>
+    <p class="text-white">ngmusic</p>
+    <div class="absolute flex flex-col bottom-0 mb-4 w-full px-6">
+      <input
+        class="
+          bg-white
+          rounded-3xl
+          text-purple-600 text-sm
+          font-semibold
+          tracking-wide
+          p-3
+          mb-4
+          text-center
+          focus:border-0
+        "
+        placeholder="Artist / Album / Title"
+        [formControl]="searchControl"
+      />
+      <button
+        class="
+          bg-purple-400
+          rounded-3xl
+          text-white
+          p-3
+          text-sm
+          font-semibold
+          tracking-wide
+        "
+        [disabled]="searchControl.invalid"
+        (click)="iTunesSearch(searchControl.value)"
+      >
+        Search iTunes
+      </button>
+    </div>
+  </form>
+</div>
